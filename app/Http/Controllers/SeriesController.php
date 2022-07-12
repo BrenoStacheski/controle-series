@@ -16,4 +16,9 @@ class SeriesController extends Controller
 
         return view('series.index', compact('series')); //->with('series', $series); TBM DA PRA USAR
     } 
+
+    public function create() 
+    {
+        return view('series.create');
+    }
 }
