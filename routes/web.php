@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SeriesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/series');
 });
 
+Route::controller(SeriesController::class)->group(function () {
 Route::get('/series', 'App\Http\Controllers\SeriesController@index');
 Route::get('/series/criar', 'App\Http\Controllers\SeriesController@create');
 Route::post('/series/salvar', 'App\Http\Controllers\SeriesController@store');
+});
