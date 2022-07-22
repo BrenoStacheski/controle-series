@@ -25,17 +25,42 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
-        $serie = Serie::create($request->all());
+        $nome = $request->nome;
+        $serie = new Serie();
+        $serie->nome = $nome;
+        $serie->save();
 
         return Redirect::to('series')
         ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso!");
     }
 
-    public function destroy(Serie $id)
+    public function destroy(Request $request, $id)
     {
-        $id->delete();
+        $serie = Serie::where('id', $id)->first();
+        $serie->delete();
 
-        return Redirect::to('series')
-        ->with('mensagem.sucesso', "Série '{$id->nome}' removida com sucesso");
+        return view('series.index', ['mensagemSucesso' => "Série '{$serie->nome}' removida com sucesso", 'series' => Serie::all()]);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $serie = Serie::where('id', $id)->first();
+        if (empty($serie)) {
+            return "Série inexistente";
+        } else {
+            return view('series.edit')->with('serie', $serie);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $serie = Serie::where('id', $id)->first();
+        if (empty($serie)) {
+            return "Série inexistente";
+        } else {
+            $serie->nome = $request->nome;
+            $serie->save();
+            return view('series.index')->with('series', Serie::all());
+        }
     }
 }

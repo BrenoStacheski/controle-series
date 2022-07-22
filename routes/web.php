@@ -19,10 +19,12 @@ Route::get('/', function () {
 });
 
 Route::controller(SeriesController::class)->group(function () {
-Route::get('/series', 'App\Http\Controllers\SeriesController@index');
-Route::get('/series/criar', 'App\Http\Controllers\SeriesController@create');
-Route::post('/series/salvar', 'App\Http\Controllers\SeriesController@store');
+    Route::get('/series', 'App\Http\Controllers\SeriesController@index');
+    Route::get('/series/criar', 'App\Http\Controllers\SeriesController@create');
+    Route::post('/series/salvar', 'App\Http\Controllers\SeriesController@store');
+    Route::get('/series/editar/{id}', 'App\Http\Controllers\SeriesController@edit');
+    Route::get('/series/atualizar/{id}', 'App\Http\Controllers\SeriesController@update');
+    Route::delete('/series/destroy/{id}', 'App\Http\Controllers\SeriesController@destroy')->name('series.destroy');
 });
 
-Route::delete('/series/destroy/{id}', 'App\Http\Controllers\SeriesController@destroy')
-->name('series.destroy');
+//Route::put('/series/editar/{id}', 'App\Http\Controllers\SeriesController@edit');
