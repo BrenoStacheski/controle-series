@@ -25,8 +25,11 @@ Route::controller(SeriesController::class, SeasonsController::class)->group(func
     Route::post('/series/salvar', 'App\Http\Controllers\SeriesController@store');
     Route::get('/series/editar/{id}', 'App\Http\Controllers\SeriesController@edit');
     Route::get('/series/atualizar/{id}', 'App\Http\Controllers\SeriesController@update');
-    Route::delete('/series/destroy/{id}', 'App\Http\Controllers\SeriesController@destroy')->name('series.destroy');
-    Route::get('/series/{series}/seasons', 'App\Http\Controllers\SeasonsController@index')->name('seasons.index');
+    Route::delete('/series/destroy/{id}', 'App\Http\Controllers\SeriesController@destroy')
+    ->name('series.destroy');
+    Route::get('/series/{series}/seasons', 'App\Http\Controllers\SeasonsController@index')
+    ->name('seasons.index');
+    Route::get('/seasons/{season}/episodes', 'App\Http\Controllers\EpisodesController@index')
+    ->name('episodes.index');
 });
 
-//Route::put('/series/editar/{id}', 'App\Http\Controllers\SeriesController@edit');
