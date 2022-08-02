@@ -31,5 +31,7 @@ Route::controller(SeriesController::class, SeasonsController::class)->group(func
     ->name('seasons.index');
     Route::get('/seasons/{season}/episodes', 'App\Http\Controllers\EpisodesController@index')
     ->name('episodes.index');
+    Route::post('/seasons/{season}/episodes', 'App\Http\Controllers\EpisodesController@update')
+    ->name('episodes.update');
 });
 
